@@ -1,6 +1,8 @@
-from app import ma
+from create_app import ma
 from models.transaction import Transaction
 
 class TransactionSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Transaction
+        load_instance = True
+        include_fk = True

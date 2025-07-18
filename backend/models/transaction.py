@@ -1,4 +1,4 @@
-from app import db
+from create_app import db
 
 class Transaction(db.Model):
     __tablename__ = 'transactions'
@@ -6,5 +6,5 @@ class Transaction(db.Model):
     group_id = db.Column(db.Integer, db.ForeignKey('groups.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     amount = db.Column(db.Float, nullable=False)
-    type = db.Column(db.String(50), nullable=False)  # deposit, withdrawal, service_charge
+    type = db.Column(db.String(50), nullable=False)
     timestamp = db.Column(db.DateTime, default=db.func.current_timestamp())

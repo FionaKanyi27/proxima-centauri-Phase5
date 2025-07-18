@@ -3,7 +3,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from models.transaction import Transaction
 from models.group import Group
 from schemas.transaction import TransactionSchema
-from app import db
+from create_app import db
 
 class TransactionListResource(Resource):
     parser = reqparse.RequestParser()

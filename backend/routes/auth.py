@@ -2,7 +2,7 @@ from flask_restful import Resource, reqparse
 from flask_jwt_extended import create_access_token
 from models.user import User
 from schemas.user import UserSchema
-from app import db
+from create_app import db
 
 class AuthRegister(Resource):
     parser = reqparse.RequestParser()

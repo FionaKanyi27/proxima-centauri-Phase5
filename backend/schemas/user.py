@@ -1,7 +1,8 @@
-from app import ma
+from create_app import ma
 from models.user import User
 
 class UserSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = User
-        exclude = ('password_hash',)
+        load_instance = True
+        include_fk = True
