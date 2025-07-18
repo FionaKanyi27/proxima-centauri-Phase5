@@ -1,5 +1,6 @@
 import pytest
-from create_app import create_app, db
+from create_app import create_app
+from extensions import db
 
 @pytest.fixture
 def client():

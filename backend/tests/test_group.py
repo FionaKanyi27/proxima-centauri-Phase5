@@ -1,5 +1,6 @@
 import pytest
-from create_app import create_app, db
+from create_app import create_app
+from extensions import db
 from flask_jwt_extended import create_access_token
 
 @pytest.fixture

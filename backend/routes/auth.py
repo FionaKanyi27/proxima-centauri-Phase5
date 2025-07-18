@@ -2,7 +2,7 @@ from flask_restful import Resource, reqparse
 from flask_jwt_extended import create_access_token
 from models.user import User
 from schemas.user import UserSchema
-from create_app import db
+from extensions import db
 
 class AuthRegister(Resource):
     parser = reqparse.RequestParser()
@@ -29,6 +29,6 @@ class AuthLogin(Resource):
         args = self.parser.parse_args()
         user = User.query.filter_by(email=args['email']).first()
         if user and user.check_password(args['password']):
-            token = create_access_token(identity=user.id)
+            token = create_access_token(identity=str(user.id))
             return {'token': token}, 200
         return {'message': 'Invalid credentials'}, 401

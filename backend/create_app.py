@@ -1,14 +1,7 @@
 from flask import Flask
-from backend.config import Config
-from flask_sqlalchemy import SQLAlchemy
-from flask_marshmallow import Marshmallow
+from config import Config
+from extensions import db, ma, jwt
 from flask_restful import Api
-from flask_jwt_extended import JWTManager
-
-db = SQLAlchemy()
-ma = Marshmallow()
-api = Api()
-jwt = JWTManager()
 
 def create_app():
     print("Creating Flask app")
@@ -20,7 +13,7 @@ def create_app():
     try:
         db.init_app(app)
         ma.init_app(app)
-        api.init_app(app)
+        api = Api(app)  # Initialize API directly with app
         jwt.init_app(app)
     except Exception as e:
         print(f"Error initializing extensions: {e}")
@@ -54,10 +47,10 @@ def create_app():
             db.create_all()
             print("Database tables created")
 
-            # Debug: Print all registered routes
-            print("Registered routes:", [rule for rule in app.url_map.iter_rules()])
         except Exception as e:
             print(f"Error in app context: {e}")
             raise
 
+    # Debug: Print all registered routes (outside app context)
+    print("Registered routes:", [rule for rule in app.url_map.iter_rules()])
     return app

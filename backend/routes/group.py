@@ -3,7 +3,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from models.group import Group
 from models.user import User
 from schemas.group import GroupSchema
-from create_app import db
+from extensions import db
 
 class GroupListResource(Resource):
     parser = reqparse.RequestParser()
@@ -13,7 +13,7 @@ class GroupListResource(Resource):
     @jwt_required()
     def post(self):
         args = self.parser.parse_args()
-        user_id = get_jwt_identity()
+        user_id = int(get_jwt_identity())
         group = Group(name=args['name'], description=args['description'], creator_id=user_id)
         db.session.add(group)
         db.session.commit()
@@ -24,7 +24,7 @@ class GroupListResource(Resource):
 
     @jwt_required()
     def get(self):
-        user_id = get_jwt_identity()
+        user_id = int(get_jwt_identity())
         user = User.query.get(user_id)
         return GroupSchema(many=True).dump(user.groups), 200
 

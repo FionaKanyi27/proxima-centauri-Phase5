@@ -1,4 +1,4 @@
-from create_app import ma
+from extensions import ma
 from models.group import Group
 
 class GroupSchema(ma.SQLAlchemyAutoSchema):

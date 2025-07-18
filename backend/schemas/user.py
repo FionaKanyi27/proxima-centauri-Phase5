@@ -1,4 +1,4 @@
-from create_app import ma
+from extensions import ma
 from models.user import User
 
 class UserSchema(ma.SQLAlchemyAutoSchema):

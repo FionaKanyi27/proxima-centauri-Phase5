@@ -1,4 +1,4 @@
-from create_app import ma
+from extensions import ma
 from models.transaction import Transaction
 
 class TransactionSchema(ma.SQLAlchemyAutoSchema):
